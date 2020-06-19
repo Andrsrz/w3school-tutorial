@@ -4,6 +4,12 @@ var filesystem = require('fs');
 var dt = require('./myFirstModule.js');
 
 http.createServer(function (req, res){
+	filesystem.appendFile('newFile.txt', 'Hello from NodeJS', (error) => {
+		if(error)
+			throw error;
+		console.log('Saved!');
+	});
+
 	filesystem.readFile('template.html', (error, data) => {
 		res.writeHead(200, {'Content-Type':'text/html'});
 		res.write("The current date is: " + dt.myDateTime());
@@ -14,6 +20,11 @@ http.createServer(function (req, res){
 		res.write(text);
 		res.write("<hr>");
 		res.write(data)
+	});
+
+	filesystem.readFile('newFile.txt', (error, data) => {
+		res.write("<hr>");
+		res.write(data);
 		return res.end();
 	});
 }).listen(8080);
