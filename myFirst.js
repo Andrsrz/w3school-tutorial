@@ -4,7 +4,7 @@ var filesystem = require('fs');
 var dt = require('./myFirstModule.js');
 
 http.createServer(function (req, res){
-	filesystem.appendFile('newFile.txt', 'Hello from NodeJS', (error) => {
+	filesystem.writeFile('newFile.txt', 'Hello from NodeJS', (error) => {
 		if(error)
 			throw error;
 		console.log('Saved!');
